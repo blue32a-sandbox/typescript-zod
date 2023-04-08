@@ -37,7 +37,12 @@ describe('Strings', () => {
   });
   test.todo('url');
   test.todo('emoji');
-  test.todo('uuid');
+  describe('uuid', () => {
+    test('parse', () => {
+      const id = 'da0054d6-e0e9-4ea1-ba0c-3f891d1a35fb';
+      expect(str.uuid.parse(id)).toBe(id);
+    });
+  });
   test.todo('cuid');
   test.todo('cuid2');
   test.todo('ulid');
