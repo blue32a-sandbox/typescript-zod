@@ -4,27 +4,34 @@ import * as str from './strings';
 describe('Strings', () => {
   describe('max 5', () => {
     test('parse', () => {
-      expect(str.maxfive.parse('abcde')).toBe('abcde');
+      expect(str.maxfive.safeParse('abcde').success).toBe(true);
+      expect(str.maxfive.safeParse('あいうえお').success).toBe(true);
     });
     test('parse error', () => {
       expect(() => str.maxfive.parse('abcdef')).toThrow(ZodError);
+      expect(() => str.maxfive.parse('あいうえおか')).toThrow(ZodError);
     })
   });
   describe('min 5', () => {
     test('parse', () => {
-      expect(str.minfive.parse('abcde')).toBe('abcde');
+      expect(str.minfive.safeParse('abcde').success).toBe(true);
+      expect(str.minfive.safeParse('あいうえお').success).toBe(true);
     });
     test('parse error', () => {
       expect(() => str.minfive.parse('abcd')).toThrow(ZodError);
+      expect(() => str.minfive.parse('あいうえ')).toThrow(ZodError);
     });
   });
   describe('length 5', () => {
     test('parse', () => {
-      expect(str.lenfive.parse('abcde')).toBe('abcde');
+      expect(str.lenfive.safeParse('abcde').success).toBe(true);
+      expect(str.lenfive.safeParse('あいうえお').success).toBe(true);
     });
     test('parse error', () => {
       expect(() => str.lenfive.parse('abcd')).toThrow(ZodError);
       expect(() => str.lenfive.parse('abcdef')).toThrow(ZodError);
+      expect(() => str.lenfive.parse('あいうえ')).toThrow(ZodError);
+      expect(() => str.lenfive.parse('あいうえおか')).toThrow(ZodError);
     });
   });
   describe('email', () => {
